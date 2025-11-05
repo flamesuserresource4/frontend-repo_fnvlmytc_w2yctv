@@ -1,28 +1,58 @@
-import { useState } from 'react'
+import React, { useEffect } from 'react';
+import Hero from './components/Hero.jsx';
+import WhoWeServe from './components/WhoWeServe.jsx';
+import Testimonials from './components/Testimonials.jsx';
+import ValueAndCTA from './components/ValueAndCTA.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    document.title = 'EstimatorsPro — Quotation & Estimation Software';
+    const ensureTag = (selector, create) => {
+      let el = document.querySelector(selector);
+      if (!el) {
+        el = create();
+        document.head.appendChild(el);
+      }
+      return el;
+    };
+
+    ensureTag('meta[name="description"]', () => {
+      const m = document.createElement('meta');
+      m.setAttribute('name', 'description');
+      m.setAttribute('content', 'Customized estimation tools for service & industrial businesses. Eliminate spreadsheet chaos, deliver accurate quotes faster, and close more deals.');
+      return m;
+    }).setAttribute('content', 'Customized estimation tools for service & industrial businesses. Eliminate spreadsheet chaos, deliver accurate quotes faster, and close more deals.');
+
+    ensureTag('meta[property="og:title"]', () => {
+      const m = document.createElement('meta');
+      m.setAttribute('property', 'og:title');
+      m.setAttribute('content', 'EstimatorsPro — Quotation & Estimation Software');
+      return m;
+    });
+
+    ensureTag('meta[property="og:description"]', () => {
+      const m = document.createElement('meta');
+      m.setAttribute('property', 'og:description');
+      m.setAttribute('content', 'Customized estimation tools for service & industrial businesses.');
+      return m;
+    });
+
+    ensureTag('meta[name="theme-color"]', () => {
+      const m = document.createElement('meta');
+      m.setAttribute('name', 'theme-color');
+      m.setAttribute('content', '#0a0a0a');
+      return m;
+    });
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div className="bg-neutral-950 text-white">
+      <Hero />
+      <WhoWeServe />
+      <Testimonials />
+      <ValueAndCTA />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
